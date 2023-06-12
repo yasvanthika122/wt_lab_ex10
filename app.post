@@ -1,0 +1,43 @@
+('/carti', async(req, res) => {
+  const formData = req.body.data;
+  function generateRandomAlphaNumeric(length) {
+    var result = '';
+    var characters = '0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      var randomIndex = Math.floor(Math.random() * charactersLength);
+      result += characters.charAt(randomIndex);
+    }
+    return result;
+  }
+  var code = generateRandomAlphaNumeric(13);
+  const newData = new cart({
+    objects: formData,
+    mai: mai,
+    usn:usn,
+    Oid:code
+  });
+  newData.save()
+  .then(() => {
+    console.log('Data saved successfully');
+  })
+  .catch(error => {
+    console.error('Error saving data:', error);
+  });
+ 
+});
+app.post('/cancel', async(req, res) => {
+  const formData = req.body;
+  console.log('Form submitted successfully',formData);
+  const oo=formData.Oid;
+  console.log(oo);
+  console.log(usn,mai);
+  cart.deleteOne({Oid:oo}).then((result)=>
+  {
+    if(!result){
+      throw err;
+    }
+    else{
+        console.log("deleted");
+
+});
